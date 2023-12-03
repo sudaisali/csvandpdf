@@ -1,0 +1,20 @@
+1- create endpoint
+          download csv file of product and productline and delete from update folder
+          with date Scheduler
+
+2 - Generate invoice  and 
+
+
+Merge pdf1 and pdf2
+
+3 - save csv file with uuid
+
+
+customer, firstname lastname
+creditlimit, 
+payment date and payment amount
+order date ,and ,ship date, and order status
+order details ,quantity order
+product name ,buy price, and ship detail ,product line details
+sale employee ,first name and , last name , office detail
+
