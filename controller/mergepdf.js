@@ -2,7 +2,7 @@ const { PDFDocument } = require('pdf-lib');
 const fs = require('fs').promises;
 const path = require('path');
 
-async function mergeFile(req, res){
+async function mergeFile(req, res){     //check file upload or not
     try {
       console.log('Request received'); 
       if (!req.files || Object.keys(req.files).length === 0) {
@@ -13,7 +13,7 @@ async function mergeFile(req, res){
       console.log('PDF Files:', pdfFiles); 
       const outputPath = path.join(__dirname, '..', 'merged.pdf');
       console.log('Output Path:', outputPath); 
-      await mergePDFs(pdfFiles, outputPath);
+      await mergePDFs(pdfFiles, outputPath);        //if upload send files and output path
       res.status(200).send(`Merged PDF saved to ${outputPath}`);
     } catch (error) {
       console.error('Error:', error.message);
@@ -21,7 +21,7 @@ async function mergeFile(req, res){
     }
 }
 
-async function mergePDFs(pdfFiles, outputPath) {
+async function mergePDFs(pdfFiles, outputPath) {      //merge both files
   try {
     const mergedPdf = await PDFDocument.create();
    console.log(mergedPdf)

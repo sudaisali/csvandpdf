@@ -55,8 +55,11 @@ async function getInvoice(req, res) {
     // Pipe the PDF content directly to the response stream
     doc.pipe(res);
     // Add content to the PDF
-    doc.fontSize(18).text(`Invoice for Order ${orderNumber}`, { align: 'center' });
-    let yPos = 100;
+    
+    const imagePath = 'img/logo.png'; 
+    doc.image(imagePath, { width: 120, align: 'center' });
+    doc.fontSize(20).text(`Invoice for Order ${orderNumber}`, { align: 'center' });
+    let yPos = 150;
     // Column 1: Customer Details
     doc.font('Helvetica-Bold').fontSize(8).text(`Customer Number: ${orderDetails.Customer.customerNumber}`, 20, yPos);
     doc.text(`First Name: ${orderDetails.Customer.contactFirstName}`, 20, yPos + 20);
@@ -78,7 +81,7 @@ async function getInvoice(req, res) {
     doc.text(`EmployeeOffice: ${orderDetails.Customer.Employee.Office.city}`, 350, yPosEmployeeDetails + 80);
 
 
-    let yPosTable = 220; // Adjust the starting y-coordinate for the table as needed
+    let yPosTable = 280; // Adjust the starting y-coordinate for the table as needed
     // Table Header
     doc.font('Helvetica-Bold').fontSize(12).text('Product Code', 50, yPosTable - 20);
     doc.text('Quantity', 150, yPosTable - 20);
@@ -86,14 +89,14 @@ async function getInvoice(req, res) {
     doc.text('T-Price', 300, yPosTable - 20);
     doc.text('  Line Number', 350, yPosTable - 20);
 
-    // Add a space between table header and rows
+    
     yPosTable += -5;
 
     // Table Rows
     orderDetails.OrderDetails.forEach(orderDetail => {
       doc.fontSize(12).text(orderDetail.productCode, 50, yPosTable);
       doc.text(orderDetail.quantityOrdered.toString(), 150, yPosTable);
-      doc.text(`${orderDetail.priceEach}`, 250, yPosTable); // Give Slightly space between table headings and columns
+      doc.text(`${orderDetail.priceEach}`, 250, yPosTable); //  space between table headings and columns
 
 
       // Calculate and display total price
